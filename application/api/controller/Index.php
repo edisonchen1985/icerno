@@ -59,13 +59,13 @@ class Index
     }
     public function respond($respond_message,$room){
         define('REST_API_ROOT', '/api/v1/');
-        define('ROCKET_CHAT_INSTANCE', 'https://cc.nomalis.com');
+        define('ROCKET_CHAT_INSTANCE', 'http://localhost:3000');
         // define('ROCKET_CHAT_INSTANCE', 'http://192.168.6.35:3000');
 
         // $api = new \RocketChat\Client();
         // login as the main admin user
-        $rocket_login_username = 'chenchan';
-        $rocket_login_password = 'chenchan';
+        $rocket_login_username = 'old';
+        $rocket_login_password = 'old';
         $admin = new \RocketChat\User($rocket_login_username, $rocket_login_password);
         if( $admin->login() ) {
             // echo "admin user logged in\n";
