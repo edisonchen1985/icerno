@@ -64,6 +64,7 @@ class Index
 
         // $api = new \RocketChat\Client();
         // login as the main admin user
+        //local的账户
         $rocket_login_username = 'old';
         $rocket_login_password = 'old';
         $admin = new \RocketChat\User($rocket_login_username, $rocket_login_password);
