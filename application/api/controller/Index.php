@@ -46,11 +46,12 @@ class Index
         //如果消息是请假的话，则创建一个请假房间
         if($info == '请假'){
             $user_name = $data['user_name'];
-            $room = $this->ai_login_name.'-'.$user_name.'-'.time();
+            $room = $this->ai_login_name.'-'.$user_name.'-'.substr(time(),5);
             $respond_message = "请假房间已为您创建成功，请从左侧房间导航处寻找：".$room;
             $sender = new \RocketChat\User($user_name, 'empty');
+            $ai = new \RocketChat\User($this->ai_login_name, $this->ai_login_password);
             $users = array();
-            $users[] = $this->ai_login_name;
+            $users[] = $ai;
             $users[] = $sender;
             $group_welcome_message = "欢迎您进入AI请假室";
             $this->createGroup($group_welcome_message,$room,$users);
