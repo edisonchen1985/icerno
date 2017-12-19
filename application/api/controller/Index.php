@@ -47,7 +47,7 @@ class Index
         if($info == '请假'){
             $user_name = $data['user_name'];
             $room = $this->ai_login_name.'-'.$user_name.'-'.substr(time(),5);
-            $respond_message = "请假房间:".$room" 已为您创建成功，请从左侧频道列表处进入！";
+            $respond_message = "请假房间:".$room." 已为您创建成功，请从左侧频道列表处进入！";
             $sender = new \RocketChat\User($user_name, 'empty');
             $ai = new \RocketChat\User($this->ai_login_name, $this->ai_login_password);
             $users = array();
