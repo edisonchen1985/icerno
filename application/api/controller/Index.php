@@ -47,13 +47,13 @@ class Index
         if($info == '请假'){
             $user_name = $data['user_name'];
             $room = $this->ai_login_name.'-'.$user_name.'-'.substr(time(),5);
-            $respond_message = "请假房间已为您创建成功，请从左侧房间导航处寻找：".$room;
+            $respond_message = "请假房间:".$room" 已为您创建成功，请从左侧频道列表处进入！";
             $sender = new \RocketChat\User($user_name, 'empty');
             $ai = new \RocketChat\User($this->ai_login_name, $this->ai_login_password);
             $users = array();
             $users[] = $ai;
             $users[] = $sender;
-            $group_welcome_message = "欢迎您进入AI请假室";
+            $group_welcome_message = "欢迎".$user_name."来到AI请假室";
             $this->createGroup($group_welcome_message,$room,$users);
             $this->respond($respond_message,$room);
         }else{
@@ -76,10 +76,11 @@ class Index
             curl_close($curl);
 
             $respond_message = $result['text'];
+            $room = $data['channel_id'];
+            $this->respond($respond_message,$room);
         }
         
-        $room = $data['channel_id'];
-        $this->respond($respond_message,$room);
+        
     }
     public function respond($respond_message,$room){
 
