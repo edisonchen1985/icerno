@@ -48,9 +48,10 @@ class Index
             $user_name = $data['user_name'];
             $room = $this->ai_login_name.'-'.$user_name.'-'.time();
             $respond_message = "请假房间已为您创建成功，请从左侧房间导航处寻找：".$room;
+            $sender = new \RocketChat\User($user_name, 'empty');
             $users = array();
             $users[] = $this->ai_login_name;
-            $users[] = $user_name;
+            $users[] = $sender;
             $group_welcome_message = "欢迎您进入AI请假室";
             $this->createGroup($group_welcome_message,$room,$users);
             $this->respond($respond_message,$room);
