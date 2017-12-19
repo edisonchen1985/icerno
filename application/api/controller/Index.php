@@ -49,10 +49,12 @@ class Index
             $room = $this->ai_login_name.'-'.$user_name.'-'.substr(time(),5);
             $respond_message = "请假房间:".$room." 已为您创建成功，请从左侧频道列表处进入！";
             $sender = new \RocketChat\User($user_name, 'empty');
+            $li_lei = new \RocketChat\User('lilei', 'empty');//现在固定一个
             $ai = new \RocketChat\User($this->ai_login_name, $this->ai_login_password);
             $users = array();
             $users[] = $ai;
             $users[] = $sender;
+            $users[] = $li_lei;
             $group_welcome_message = "欢迎".$user_name."来到AI请假室";
             $this->createGroup($group_welcome_message,$room,$users);
         }else{
