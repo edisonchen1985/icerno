@@ -55,7 +55,6 @@ class Index
             $users[] = $sender;
             $group_welcome_message = "欢迎".$user_name."来到AI请假室";
             $this->createGroup($group_welcome_message,$room,$users);
-            $this->respond($respond_message,$room);
         }else{
             // dump(json_encode($array));exit;
             // echo $json_data;
@@ -76,9 +75,10 @@ class Index
             curl_close($curl);
 
             $respond_message = $result['text'];
-            $room = $data['channel_id'];
-            $this->respond($respond_message,$room);
+            
         }
+        $room = $data['channel_id'];
+        $this->respond($respond_message,$room);
         
         
     }
