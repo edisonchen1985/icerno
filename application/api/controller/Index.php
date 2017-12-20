@@ -20,8 +20,8 @@ class Index
     public function __construct(){
         define('REST_API_ROOT', '/api/v1/');
         define('ROCKET_CHAT_INSTANCE', 'https://cc.nomalis.com');
-        $this->ai_login_name = 'ai';
-        $this->ai_login_password = 'ai';
+        $this->ai_login_name = 'dizzy.ai';
+        $this->ai_login_password = '2017Lzhl';
     }
 
     public function index()
