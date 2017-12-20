@@ -1,6 +1,7 @@
 <?php
 namespace app\api\controller;
 use \think\Request;
+use think\Db;
 /*
 后台登陆：
 http://www.tuling123.com/member/robot/index.jhtml
@@ -131,6 +132,48 @@ class Index
             dump($all);
         };
         
+    }
+
+    //用户离开房间调用的接口
+    public function leaveRoom(){
+
+        $data = file_get_contents("php://input");
+        if(empty($data)){
+            exit;
+        }
+        $data = json_decode($data,true);
+
+
+        $insert_data = array();
+        $insert_data['channel_id'] = $data['channel_id'];
+        $insert_data['channel_name'] = $data['channel_name'];
+        $insert_data['log_type'] = 1; //log_type为1是离开房间
+        $insert_data['user_id'] = $data['user_id'];
+        $insert_data['user_name'] = $data['user_name'];
+        $insert_data['log_time'] = time();
+
+        Db::table('room_action_log')->insert($insert_data);
+    }
+
+    //用户加入公共房间调用的接口
+    public function leaveRoom(){
+
+        $data = file_get_contents("php://input");
+        if(empty($data)){
+            exit;
+        }
+        $data = json_decode($data,true);
+
+
+        $insert_data = array();
+        $insert_data['channel_id'] = $data['channel_id'];
+        $insert_data['channel_name'] = $data['channel_name'];
+        $insert_data['log_type'] = 0; //log_type为0是离开房间
+        $insert_data['user_id'] = $data['user_id'];
+        $insert_data['user_name'] = $data['user_name'];
+        $insert_data['log_time'] = time();
+
+        Db::table('room_action_log')->insert($insert_data);
     }
 }
 
