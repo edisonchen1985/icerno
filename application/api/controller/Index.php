@@ -156,7 +156,7 @@ class Index
     }
 
     //用户加入公共房间调用的接口
-    public function leaveRoom(){
+    public function joinRoom(){
 
         $data = file_get_contents("php://input");
         if(empty($data)){
