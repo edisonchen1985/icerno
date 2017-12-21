@@ -153,7 +153,7 @@ class Index
         $data = json_decode($data,true);
 
         //向这个房间里发送一条欢迎这个用户的消息(排除掉Dizzy.ai本身)
-        if($data['user_id'] != 'oDrqbojgituFwWdnD'){
+        if($data['channel_name'] == 'general' && $data['user_id'] != 'oDrqbojgituFwWdnD'){
             $f_name = $data['user']['name'];
             $respond_message = '欢迎'.$f_name.'同学加入频道！';
             $this->respond($respond_message,$data['channel_id']);
