@@ -152,7 +152,13 @@ class Index
         }
         $data = json_decode($data,true);
 
+        //向这个房间里发送一条欢迎这个用户的消息
+        $f_name = $data['user']['name'];
+        $respond_message = '欢迎'.$f_name.'同学加入频道！';
+        $this->respond($respond_message,$data['channel_id']);
 
+
+        //加入房间事件存入数据库log表里
         $insert_data = array();
         $insert_data['channel_id'] = $data['channel_id'];
         $insert_data['channel_name'] = $data['channel_name'];
