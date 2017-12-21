@@ -8,7 +8,33 @@
 </head>
 <body>
 	<table class="table">
-	  {$a}
+	  	<thead>
+	        <tr>
+				<th class="">用户姓名</th>
+				<th class="">频道名称</th>
+				<th class="">操作类型</th>
+				<th class="">操作日期</th>
+			</tr>
+	    </thead>
+	    <tbody>
+			{notempty name="lists"}
+				{volist name="lists" id="vo"}
+					<tr>
+						<td>{$vo.user_name}</td>
+						<td>{$vo.channel_name}</td>
+						<td>
+							{switch name="$vo.log_type" }
+							    {case value="1"}离开房间{/case}
+							    {case value="0"}加入房间{/case}
+							{/switch}
+						</td>
+						<td>{$vo.log_time | date="y-m-d H:m:s",###}</td>
+					</tr>
+				{/volist}
+			{else /}
+				<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+			{/notempty}
+		</tbody>
 	</table>
 </body>
 </html>

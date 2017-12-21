@@ -10,8 +10,9 @@ class Index extends Controller
 {
 
     public function index(){
-        $this->assign('a',0);
-        return view();
+        $result = Db::table('room_action_log')->order('log_time desc')->select();
+        $this->assign('lists',$result);
+        return $this->fetch();
     }
         
 }
