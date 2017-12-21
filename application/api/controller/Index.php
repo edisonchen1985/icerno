@@ -165,7 +165,7 @@ class Index
         $insert_data = array();
         $insert_data['channel_id'] = $data['channel_id'];
         $insert_data['channel_name'] = $data['channel_name'];
-        $insert_data['log_type'] = 0; //log_type为0是离开房间
+        $insert_data['log_type'] = 0; //log_type为0是加入房间
         $insert_data['user_id'] = $data['user_id'];
         $insert_data['user_name'] = $data['user_name'];
         $insert_data['log_time'] = time();
