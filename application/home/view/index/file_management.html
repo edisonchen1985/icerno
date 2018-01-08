@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<title>file-management</title>
+  	<meta charset="UTF-8">
+  	<script type="text/javascript" src="__STATIC__/admin/js/jquery.min.js"></script>
+  	<script type="text/javascript" src="__STATIC__/admin/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/bootstrap.min.css">
+    <style type="text/css">
+    	div{
+    		/*border: 1px solid red;*/
+    	}
+    </style>
+</head>
+<body>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="form-group">
+					    <label class="sr-only" for="exampleInputAmount">文件夹</label>
+					    <div class="input-group">
+							<div class="input-group-addon">文件夹名称：</div>
+							<input type="text" class="form-control" id="folder_name" placeholder="输入文件夹名称">
+					    </div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="checkbox">
+				    	{volist name="file_lists" id="vo"}
+					    	<label>
+					      		<input type="checkbox" value="{$vo.name}">{$vo.name} &nbsp;&nbsp;&nbsp;
+					    	</label>
+				      	{/volist}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="save()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-2" style="padding-left: 1px;">
+				<button type="button" class="btn btn-warning" onclick="window.history.go(-1)">返回</button>
+			</div>
+		</div>
+		<div class="row">&nbsp;</div>
+		{notempty name="file_lists"}
+			<div class="row">
+				<div class="col-xs-5">
+					<div class="row">
+							<ul class="list-group">
+								{volist name="file_lists" id="vo"}
+									<li class="list-group-item"><a href="{$vo.url}">{$vo.name}</a></li>
+						    	{/volist}
+							</ul>
+					</div>
+				</div>
+				<div class="col-xs-5">
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+					  	创建新的文件夹
+					</button>
+				</div>
+			</div>
+		{else /}
+			<li class="list-group-item"> aOh! 暂时还没有文件哦! </td>
+		{/notempty}
+	</div>
+</body>
+<script type="text/javascript">
+	function save(){
+		var folder_name = $('#folder_name').val();
+		if(folder_name == '' || typeof(folder_name)== 'undefined'){
+			alert('请输入文件夹名称');
+			return;
+		}
+		var files = [];
+		$('input:checkbox:checked').each(function (index, item) {
+         	files.push($(this).val());
+	    });
+	    if(files == ''){
+	    	alert('请至少选择一个文件！');
+			return;
+	    }
+	    var data = {};
+	    data.folder_name = folder_name;
+	    data.files = JSON.stringify(files);
+	    data.roomId = "{$roomId}"; //房间ID
+	    $.ajax({  
+	        type : "post",  
+	        data : data,
+	        url : "http://localhost/icerno/public/index.php/home/index/files_save",  
+	        dataType : "json", 
+	        success : function(data){
+	         	console.log(data);  
+	            if(data.code == 0){
+	            	$('#myModal').modal('hide');
+	            }else{
+	            	alert(data.message);
+	            }
+	        },  
+	        error:function(){  
+	            alert('network is not working!');  
+	        }  
+	    });   
+	}
+</script>
+</html>
