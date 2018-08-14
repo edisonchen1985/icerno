@@ -241,5 +241,16 @@ return [
 
     //个人配置
     'tuling_api_key'=>'326ced1f425241969ad69c1055157688',
+    //Mongodb数据库设置
+    'db_mongo' => [
+        'type'    =>   '\think\mongo\Connection', 
+        'hostname'    =>   'localhost',
+        'database'    =>   'test',
+        'username'    =>   '',
+        'password'     =>   '',
+
+        'hostport'    =>   3001,
+
+    ],
 
 ];

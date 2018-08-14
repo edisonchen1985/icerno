@@ -26,6 +26,12 @@ class User
         }
         return jsonp($response);
     }
+    public function test(){
+        $redis = new \Redis();
+        $redis->connect('127.0.0.1', 6379);
+        // $test1=Db::connect("db_mongo")->name("test")->select();
+        // dump($test1);
+    }
 }
 
 
